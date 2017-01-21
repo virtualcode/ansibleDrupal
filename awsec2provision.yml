@@ -1,0 +1,16 @@
+--- # create ec2 instances
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Basic provisioning of 1 t2.micro EC2 instances
+    ec2:
+      region: <region>
+      key_name: <key>
+      image: ami-e13739f6
+      instance_type: t2.micro
+      count: 1
+      group: <awsSecurityGroup>
+    register: result
+  - name: Instance creation result
+    debug: msg=result.stdout
